@@ -11,8 +11,16 @@ public class TerraBootstrapper implements PluginBootstrap {
 
     @Override
     public void bootstrap(@NotNull BootstrapContext context) {
-        // Register custom registries, biomes, and other data-driven content here
-        // This runs BEFORE the server fully starts
+        try {
+            context.getLifecycleManager().registerEventHandler(
+                io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents.TAGS.postFlatten(io.papermc.paper.registry.RegistryKey.BIOME),
+                event -> {
+                    // Register custom biome tags here if needed
+                }
+            );
+        } catch (Throwable ignored) {
+            // Failsafe in case older paper API is used
+        }
     }
 
     @Override

@@ -59,16 +59,7 @@ public class TerraBukkitPlugin extends JavaPlugin {
             return;
         }
 
-        try {
-            this.getLifecycleManager().registerEventHandler(
-                io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents.TAGS.postFlatten(io.papermc.paper.registry.RegistryKey.BIOME),
-                event -> {
-                    // Register custom biome tags here if needed
-                }
-            );
-        } catch (Throwable ignored) {
-            // Failsafe in case older paper API is used
-        }
+
 
         platform = NMSInitializer.init(this);
         if(platform == null) {

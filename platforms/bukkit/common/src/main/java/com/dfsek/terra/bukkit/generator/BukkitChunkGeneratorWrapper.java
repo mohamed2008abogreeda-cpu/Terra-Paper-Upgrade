@@ -83,40 +83,7 @@ public class BukkitChunkGeneratorWrapper extends org.bukkit.generator.ChunkGener
         return List.of(blockPopulator);
     }
 
-    @Override
-    public boolean shouldGenerateNoise(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ) {
-        return false;
-    }
 
-    @Override
-    public boolean shouldGenerateSurface(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ) {
-        return false;
-    }
-
-    @Override
-    public boolean shouldGenerateBedrock(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ) {
-        return false;
-    }
-
-    @Override
-    public boolean shouldGenerateCaves(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ) {
-        return false;
-    }
-
-    @Override
-    public boolean shouldGenerateDecorations(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ) {
-        return true;
-    }
-
-    @Override
-    public boolean shouldGenerateMobs(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ) {
-        return true;
-    }
-
-    @Override
-    public boolean shouldGenerateStructures(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ) {
-        return true;
-    }
 
     public ConfigPack getPack() {
         return pack;
