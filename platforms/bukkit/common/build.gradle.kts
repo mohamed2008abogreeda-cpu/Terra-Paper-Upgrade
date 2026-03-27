@@ -2,6 +2,12 @@ repositories {
 
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
 dependencies {
     shadedApi(project(":common:implementation:base"))
 
