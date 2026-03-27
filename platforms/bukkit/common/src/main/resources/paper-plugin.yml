@@ -1,0 +1,14 @@
+name: Terra
+version: '${version}'
+main: com.dfsek.terra.bukkit.TerraBukkitPlugin
+api-version: '1.21'
+description: A modern world generation platform
+authors:
+  - PolyhedralDev
+website: https://github.com/PolyhedralDev/Terra
+
+dependencies:
+  server: {}
+
+bootstrapper: com.dfsek.terra.bukkit.TerraBootstrapper
+loader: com.dfsek.terra.bukkit.TerraLoader

@@ -1,3 +1,31 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven("https://maven.solo-studios.ca/releases") {
+            name = "Solo Studios"
+        }
+        maven("https://maven.solo-studios.ca/snapshots") {
+            name = "Solo Studios"
+        }
+        maven("https://maven.fabricmc.net") {
+            name = "Fabric Maven"
+        }
+        maven("https://maven.architectury.dev/") {
+            name = "Architectury Maven"
+        }
+        maven("https://files.minecraftforge.net/maven/") {
+            name = "Forge Maven"
+        }
+        maven("https://maven.quiltmc.org/repository/release/") {
+            name = "Quilt"
+        }
+    }
+}
+
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version("0.8.0")
+}
+
 rootProject.name = "Terra"
 
 
@@ -22,30 +50,6 @@ includeImmediateChildren(file("platforms/bukkit/nms"), "Bukkit NMS")
 
 include(":platforms:bukkit:common")
 include(":platforms:minestom:example")
-
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        maven("https://maven.solo-studios.ca/releases") {
-            name = "Solo Studios"
-        }
-        maven("https://maven.solo-studios.ca/snapshots") {
-            name = "Solo Studios"
-        }
-        maven("https://maven.fabricmc.net") {
-            name = "Fabric Maven"
-        }
-        maven("https://maven.architectury.dev/") {
-            name = "Architectury Maven"
-        }
-        maven("https://files.minecraftforge.net/maven/") {
-            name = "Forge Maven"
-        }
-        maven("https://maven.quiltmc.org/repository/release/") {
-            name = "Quilt"
-        }
-    }
-}
 
 // settings.gradle.kts
 val isCiServer = System.getenv().containsKey("CI")

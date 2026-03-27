@@ -61,10 +61,21 @@ public class BukkitChunkGeneratorWrapper extends org.bukkit.generator.ChunkGener
         return new BukkitBiomeProvider(pack.getBiomeProvider());
     }
 
+    // MODERNIZED: Changed ChunkGenerator API for Paper 1.21
     @Override
-    public void generateNoise(@NotNull WorldInfo worldInfo, @NotNull Random random, int x, int z, @NotNull ChunkData chunkData) {
+    public void generateSurface(@NotNull WorldInfo worldInfo, @NotNull Random random, int x, int z, @NotNull ChunkData chunkData) {
         BukkitWorldProperties properties = new BukkitWorldProperties(worldInfo);
         delegate.generateChunkData(new BukkitProtoChunk(chunkData), properties, pack.getBiomeProvider(), x, z);
+    }
+
+    @Override
+    public void generateBedrock(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ, @NotNull ChunkData chunkData) {
+        // Handled by generateSurface
+    }
+
+    @Override
+    public void generateCaves(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ, @NotNull ChunkData chunkData) {
+        // Handled by generateSurface
     }
 
     @Override
@@ -73,23 +84,37 @@ public class BukkitChunkGeneratorWrapper extends org.bukkit.generator.ChunkGener
     }
 
     @Override
-    public boolean shouldGenerateCaves() {
+    public boolean shouldGenerateNoise(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ) {
         return false;
-        //return pack.vanillaCaves();
     }
 
     @Override
-    public boolean shouldGenerateDecorations() {
+    public boolean shouldGenerateSurface(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ) {
+        return false;
+    }
+
+    @Override
+    public boolean shouldGenerateBedrock(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ) {
+        return false;
+    }
+
+    @Override
+    public boolean shouldGenerateCaves(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ) {
+        return false;
+    }
+
+    @Override
+    public boolean shouldGenerateDecorations(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ) {
         return true;
     }
 
     @Override
-    public boolean shouldGenerateMobs() {
+    public boolean shouldGenerateMobs(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ) {
         return true;
     }
 
     @Override
-    public boolean shouldGenerateStructures() {
+    public boolean shouldGenerateStructures(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ) {
         return true;
     }
 

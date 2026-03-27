@@ -3,6 +3,12 @@ plugins {
     id("xyz.jpenilla.run-paper") version Versions.Bukkit.runPaper
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
 dependencies {
     // Required for :platforms:bukkit:runDevBundleServer task
     paperweight.paperDevBundle(Versions.Bukkit.paperDevBundle)

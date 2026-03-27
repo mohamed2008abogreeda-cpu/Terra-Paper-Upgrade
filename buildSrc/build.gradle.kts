@@ -1,6 +1,11 @@
 plugins {
     `kotlin-dsl`
-    kotlin("jvm") version embeddedKotlinVersion
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
 }
 
 repositories {
