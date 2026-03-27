@@ -7,8 +7,8 @@ import net.minecraft.core.HolderSet.Named;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.RegistrationInfo;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.level.biome.Biome;
@@ -34,7 +34,7 @@ import com.dfsek.terra.registry.master.ConfigRegistry;
 public class AwfulBukkitHacks {
     private static final Logger LOGGER = LoggerFactory.getLogger(AwfulBukkitHacks.class);
 
-    private static final Map<ResourceLocation, List<ResourceLocation>> terraBiomeMap = new HashMap<>();
+    private static final Map<Identifier, List<Identifier>> terraBiomeMap = new HashMap<>();
 
     public static void registerBiomes(ConfigRegistry configRegistry) {
         try {
@@ -50,7 +50,7 @@ public class AwfulBukkitHacks {
                     BukkitPlatformBiome platformBiome = (BukkitPlatformBiome) biome.getPlatformBiome();
 
                     NamespacedKey vanillaBukkitKey = platformBiome.getHandle().getKey();
-                    ResourceLocation vanillaMinecraftKey = ResourceLocation.fromNamespaceAndPath(vanillaBukkitKey.getNamespace(),
+                    Identifier vanillaMinecraftKey = Identifier.fromNamespaceAndPath(vanillaBukkitKey.getNamespace(),
                         vanillaBukkitKey.getKey());
 
                     VanillaBiomeProperties vanillaBiomeProperties = biome.getContext().get(VanillaBiomeProperties.class);
@@ -58,7 +58,7 @@ public class AwfulBukkitHacks {
                     Biome platform = NMSBiomeInjector.createBiome(biomeRegistry.get(vanillaMinecraftKey).orElseThrow().value(),
                         vanillaBiomeProperties);
 
-                    ResourceLocation delegateMinecraftKey = ResourceLocation.fromNamespaceAndPath("terra",
+                    Identifier delegateMinecraftKey = Identifier.fromNamespaceAndPath("terra",
                         NMSBiomeInjector.createBiomeID(pack, key));
                     NamespacedKey delegateBukkitKey = NamespacedKey.fromString(delegateMinecraftKey.toString());
                     ResourceKey<Biome> delegateKey = ResourceKey.create(Registries.BIOME, delegateMinecraftKey);
@@ -124,11 +124,6 @@ public class AwfulBukkitHacks {
         Reflection.MAPPED_REGISTRY.getByKey(registry).values().forEach(entry -> map.put(entry, new ArrayList<>()));
         tagEntries.forEach((tag, entries) -> {
             for(Holder<T> holder : entries) {
-                //                if (!holder.canSerializeIn(registry.asLookup())) {
-                //                    throw new IllegalStateException("Can't create named set " + tag + " containing value " + holder + "
-                //                    from outside registry " + this);
-                //                }
-
                 if(!(holder instanceof Holder.Reference<T> reference)) {
                     throw new IllegalStateException("Found direct holder " + holder + " value in tag " + tag);
                 }
@@ -136,14 +131,6 @@ public class AwfulBukkitHacks {
                 map.get(reference).add(tag);
             }
         });
-        //        Set<TagKey<T>> set = Sets.difference(registry.tags.keySet(), tagEntries.keySet());
-        //        if (!set.isEmpty()) {
-        //            LOGGER.warn(
-        //                "Not all defined tags for registry {} are present in data pack: {}",
-        //                registry.key(),
-        //                set.stream().map(tag -> tag.location().toString()).sorted().collect(Collectors.joining(", "))
-        //            );
-        //        }
 
         Map<TagKey<T>, HolderSet.Named<T>> map2 = new IdentityHashMap<>(registry.getTags().collect(Collectors.toMap(
             Named::key,
@@ -161,4 +148,3 @@ public class AwfulBukkitHacks {
             entry -> Reflection.HOLDER_REFERENCE.invokeBindTags(entry, Set.of()));
     }
 }
-

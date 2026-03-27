@@ -3,13 +3,9 @@ package com.dfsek.terra.bukkit.nms.config;
 import com.dfsek.tectonic.api.config.template.ConfigTemplate;
 import com.dfsek.tectonic.api.config.template.annotations.Default;
 import com.dfsek.tectonic.api.config.template.annotations.Value;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.sounds.Music;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.npc.VillagerType;
-import net.minecraft.world.level.biome.AmbientAdditionsSettings;
-import net.minecraft.world.level.biome.AmbientMoodSettings;
-import net.minecraft.world.level.biome.AmbientParticleSettings;
 import net.minecraft.world.level.biome.Biome.TemperatureModifier;
 import net.minecraft.world.level.biome.BiomeSpecialEffects.GrassColorModifier;
 import net.minecraft.world.level.biome.MobSpawnSettings;
@@ -50,10 +46,6 @@ public class VanillaBiomeProperties implements ConfigTemplate, Properties {
     @Default
     private GrassColorModifier grassColorModifier = null;
 
-    @Value("particles")
-    @Default
-    private AmbientParticleSettings particleConfig = null;
-
     @Value("climate.precipitation")
     @Default
     private Boolean precipitation = true;
@@ -69,22 +61,6 @@ public class VanillaBiomeProperties implements ConfigTemplate, Properties {
     @Value("climate.downfall")
     @Default
     private Float downfall = null;
-
-    @Value("sound.loop-sound.sound")
-    @Default
-    private SoundEvent loopSound = null;
-
-    @Value("sound.mood-sound")
-    @Default
-    private AmbientMoodSettings moodSound = null;
-
-    @Value("sound.additions-sound")
-    @Default
-    private AmbientAdditionsSettings additionsSound = null;
-
-    @Value("sound.music")
-    @Default
-    private Music music = null;
 
     @Value("sound.music-volume")
     @Default
@@ -130,10 +106,6 @@ public class VanillaBiomeProperties implements ConfigTemplate, Properties {
         return grassColorModifier;
     }
 
-    public AmbientParticleSettings getParticleConfig() {
-        return particleConfig;
-    }
-
     public Boolean getPrecipitation() {
         return precipitation;
     }
@@ -148,22 +120,6 @@ public class VanillaBiomeProperties implements ConfigTemplate, Properties {
 
     public Float getDownfall() {
         return downfall;
-    }
-
-    public SoundEvent getLoopSound() {
-        return loopSound;
-    }
-
-    public AmbientMoodSettings getMoodSound() {
-        return moodSound;
-    }
-
-    public AmbientAdditionsSettings getAdditionsSound() {
-        return additionsSound;
-    }
-
-    public Music getMusic() {
-        return music;
     }
 
     public Float getMusicVolume() {

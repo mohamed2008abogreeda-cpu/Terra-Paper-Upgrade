@@ -1,28 +1,15 @@
 package com.dfsek.terra.bukkit.nms.config;
 
-import com.dfsek.tectonic.api.config.template.annotations.Default;
-import com.dfsek.tectonic.api.config.template.annotations.Value;
 import com.dfsek.tectonic.api.config.template.object.ObjectTemplate;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.level.biome.AmbientAdditionsSettings;
 
-
-public class BiomeAdditionsSoundTemplate implements ObjectTemplate<AmbientAdditionsSettings> {
-    @Value("sound")
-    @Default
-    private SoundEvent sound = null;
-
-    @Value("sound-chance")
-    @Default
-    private Double soundChance = null;
-
+/**
+ * Stub for Mojang 1.21.11 compatibility.
+ * AmbientAdditionsSettings was removed in 1.21.11. This class is kept for
+ * future reference but produces no functional output.
+ */
+public class BiomeAdditionsSoundTemplate implements ObjectTemplate<Object> {
     @Override
-    public AmbientAdditionsSettings get() {
-        if(sound == null || soundChance == null) {
-            return null;
-        } else {
-            return new AmbientAdditionsSettings(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(sound), soundChance);
-        }
+    public Object get() {
+        return null;
     }
 }
